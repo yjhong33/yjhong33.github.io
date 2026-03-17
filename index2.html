@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yongju Hong — Materials Chemist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #0e1117;
+  --bg-secondary: #131720;
+  --bg-card: #181d28;
+  --bg-card-hover: #1e2433;
+  --text-primary: #eaedf2;
+  --text-secondary: #a0a8b8;
+  --text-muted: #606878;
+  --accent: #56d4e0;
+  --accent-warm: #6ec6f7;
+  --accent-dim: #3ba8b2;
+  --accent-glow: rgba(86,212,224,0.12);
+  --gold: #ddb86a;
+  --gold-dim: rgba(221,184,106,0.12);
+  --border: rgba(255,255,255,0.07);
+  --border-light: rgba(255,255,255,0.10);
+  --gradient-accent: linear-gradient(135deg, #56d4e0, #6ec6f7, #a78bfa);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-dim) var(--bg-primary);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  background: rgba(14,17,23,0.7);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.4s ease;
+}
+
+nav.scrolled {
+  padding: 0.8rem 3rem;
+  background: rgba(14,17,23,0.92);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content:'';
+  position:absolute;
+  bottom:-4px;
+  left:0;
+  width:0;
+  height:1.5px;
+  background:var(--accent);
+  transition:width 0.3s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--text-primary);
+  transition: 0.3s;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 6%;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg::before {
+  content:'';
+  position:absolute;
+  top: -30%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(86,212,224,0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.hero-bg::after {
+  content:'';
+  position:absolute;
+  bottom: -20%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(221,184,106,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 10s ease-in-out infinite 2s;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 80%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.3s;
+}
+.hero-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.5s;
+  color: var(--text-primary);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.7s;
+  line-height: 1.8;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.9s;
+}
+
+.hero-stat {
+  text-align: left;
+}
+
+.hero-stat .num {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1.2;
+}
+
+.hero-stat .label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.1s;
+}
+
+.btn {
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+.btn-primary:hover {
+  background: #7aeee8;
+  box-shadow: 0 4px 30px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 7rem 6%;
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.8rem;
+}
+.section-tag::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-title em {
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* ===== ABOUT ===== */
+#about {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.about-photo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+}
+
+.about-photo-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(transparent, rgba(14,17,23,0.95));
+}
+
+.about-motto {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.about-motto-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-info-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.info-row:last-child { border: none; }
+
+.info-row .key {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.info-row .val {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+}
+
+.about-statement {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  border-left: 3px solid var(--accent);
+}
+
+.about-statement h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.about-text-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.about-text-col p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.about-visual-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-visual-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+}
+
+.about-visual-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(transparent, rgba(14,17,23,0.9));
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.about-visual-label strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  margin-bottom: 0.2rem;
+}
+
+/* ===== RESEARCH ===== */
+.research-areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.research-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.research-card::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;
+  width:0;height:2px;
+  background: var(--accent);
+  transition: width 0.4s;
+}
+
+.research-card:hover {
+  border-color: rgba(86,212,224,0.2);
+  transform: translateY(-4px);
+  background: var(--bg-card-hover);
+}
+.research-card:hover::after { width: 100%; }
+
+.research-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.3rem;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.research-card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.research-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.research-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 1.2rem;
+}
+
+.research-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(86,212,224,0.08);
+  color: var(--accent-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content:'';
+  position:absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--border));
+}
+
+.tl-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 3rem;
+}
+
+.tl-dot {
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  z-index: 2;
+}
+
+.tl-dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.tl-date {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.tl-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.tl-org {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+}
+
+.tl-desc {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.tl-desc li {
+  margin-bottom: 0.4rem;
+  list-style: none;
+  position: relative;
+  padding-left: 16px;
+}
+.tl-desc li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent-dim);
+  font-weight: 700;
+}
+
+/* ===== SKILLS ===== */
+#skills { background: var(--bg-secondary); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skill-category {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.skill-category h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  margin-bottom: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-category h3 .cat-icon {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.skill-bar-wrap {
+  width: 100px;
+  height: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  transition: width 1s ease;
+}
+
+/* ===== PUBLICATIONS ===== */
+.pub-list {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.pub-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.2rem;
+  transition: all 0.3s;
+}
+
+.pub-item:hover {
+  background: rgba(255,255,255,0.01);
+  padding-left: 0.8rem;
+}
+
+.pub-num {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.pub-item:hover .pub-num { color: var(--accent); }
+
+.pub-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.5;
+}
+
+.pub-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.pub-title a:hover {
+  color: var(--accent);
+}
+
+.pub-authors {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.pub-authors strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.pub-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 8px;
+  background: var(--gold-dim);
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.pub-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pub-toggle button {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.7rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.pub-toggle button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== AWARDS ===== */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.award-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.3rem;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.award-item:hover {
+  border-color: rgba(221,184,106,0.3);
+  transform: translateY(-2px);
+}
+
+.award-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.award-text h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.award-text .award-org {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.award-text .award-year {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent-dim);
+}
+
+/* ===== PATENTS ===== */
+#patents { background: var(--bg-secondary); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+.patent-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.patent-item {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  align-items: flex-start;
+  transition: 0.3s;
+}
+.patent-item:hover {
+  border-color: rgba(86,212,224,0.2);
+}
+
+.patent-icon {
+  width: 44px; height: 44px;
+  background: var(--accent-glow);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.patent-text h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  line-height: 1.5;
+}
+.patent-text p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===== CONTACT ===== */
+#contact {
+  text-align: center;
+  background: var(--bg-primary);
+  padding-bottom: 3rem;
+}
+
+.postdoc-banner {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(86,212,224,0.12), rgba(110,198,247,0.12));
+  border: 1px solid rgba(86,212,224,0.25);
+  border-radius: 12px;
+  padding: 1.2rem 2.5rem;
+  margin-top: 1.5rem;
+  max-width: 600px;
+}
+
+.postdoc-banner p {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.postdoc-banner .highlight-text {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s;
+  font-size: 0.88rem;
+}
+
+.contact-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.contact-card i {
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 2rem 6%;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background: rgba(14,17,23,0.97);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 4rem 5%; }
+  .hero { padding: 0 5%; }
+  .about-hero { grid-template-columns: 1fr; }
+  .about-text-section { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat .num { font-size: 2rem; }
+  .research-areas { grid-template-columns: 1fr; }
+  .pub-item { grid-template-columns: 36px 1fr; gap: 0.8rem; }
+  .awards-grid { grid-template-columns: 1fr; }
+  .contact-links { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.5rem; }
+  .hero-stats { flex-wrap: wrap; gap: 1.2rem; }
+  .hero-cta { flex-direction: column; }
+  .skills-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== PARTICLES / DECORATIVE ===== */
+.floating-shapes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.035;
+  animation: floatShape 20s ease-in-out infinite;
+}
+.shape:nth-child(1) {
+  width: 300px; height: 300px;
+  background: var(--accent);
+  top: 20%; left: 70%;
+  animation-delay: 0s;
+}
+.shape:nth-child(2) {
+  width: 200px; height: 200px;
+  background: var(--gold);
+  top: 60%; left: 10%;
+  animation-delay: -7s;
+}
+.shape:nth-child(3) {
+  width: 150px; height: 150px;
+  background: var(--accent-warm);
+  top: 80%; left: 80%;
+  animation-delay: -14s;
+}
+
+@keyframes floatShape {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  33% { transform: translate(30px,-50px) rotate(120deg); }
+  66% { transform: translate(-20px,30px) rotate(240deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Decorative -->
+<div class="floating-shapes">
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Y<span>.</span>Hong</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#research" onclick="toggleMenu()">Research</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#publications" onclick="toggleMenu()">Publications</a>
+  <a href="#awards" onclick="toggleMenu()">Awards</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label">Materials Chemist &amp; Nanoscientist</div>
+    <h1>Yongju Hong</h1>
+    <p class="hero-sub">
+      Ion-exchange-driven phase engineering of chalcogenide nanomaterials — from experimental design rules toward synthesis prediction, with lab-to-device evaluation in electrocatalysis (water electrolyzer, fuel cell, NRR) and QD-OLED manufacturing at Samsung Display.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">16</span>
+        <span class="label">Publications</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">12</span>
+        <span class="label">First Author</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">3</span>
+        <span class="label">Patents</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">11</span>
+        <span class="label">Awards</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <a href="#publications" class="btn btn-outline">View Publications</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-tag">01 — Introduction</div>
+    <h2 class="section-title">About <em>Me</em></h2>
+  </div>
+
+  <div class="about-hero reveal">
+    <div class="about-photo-card">
+      <img src="profile2.png" alt="Yongju Hong">
+      <div class="about-photo-overlay">
+        <div class="about-motto">"Progress, not perfection."</div>
+        <div class="about-motto-sub">Personal Motto</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-info-card">
+        <div class="info-row"><span class="key">Name</span><span class="val">Yongju Hong (홍용주)</span></div>
+        <div class="info-row"><span class="key">Degree</span><span class="val">M.S./Ph.D., Inorganic Chemistry</span></div>
+        <div class="info-row"><span class="key">Alma Mater</span><span class="val">Korea University</span></div>
+        <div class="info-row"><span class="key">Advisor</span><span class="val">Prof. Kwangyeol Lee</span></div>
+        <div class="info-row"><span class="key">Current</span><span class="val">Samsung Display</span></div>
+        <div class="info-row"><span class="key">Role</span><span class="val">Staff Research Engineer</span></div>
+        <div class="info-row"><span class="key">Location</span><span class="val">Seoul, South Korea</span></div>
+        <div class="info-row"><span class="key">Languages</span><span class="val">Korean · English · Chinese</span></div>
+      </div>
+      <div class="about-statement">
+        <h3>Ion-Exchange-Driven Phase Engineering: From Experimental Rules Toward Synthesis Prediction</h3>
+        <p style="color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+          Mapping chemical transformation pathways in metastable nanomaterials — bridging fundamental phase–structure relationships with scalable device applications.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-text-section reveal">
+    <div class="about-text-col">
+      <p>
+        I am an inorganic chemist and nanoscientist with deep expertise in the synthesis, chemical transformation, and structural characterization of functional nanomaterials. My research centers on using metastable templates — particularly Cu₂₋ₓS — for phase-controlled discovery of new nanomaterials via cation/anion exchange routes.
+      </p>
+      <p>
+        With crystallographic design rules (anion-sublattice preservation, lattice-mismatch tolerance, HSAB principles) as the underlying framework, I map the relationships between phase, structure, and function across compositional, morphological, and structural spaces.
+      </p>
+    </div>
+    <div class="about-text-col">
+      <p>
+        Currently, I work at Samsung Display as a Staff Research Engineer, optimizing InP-based quantum dots for QD-OLED applications — bridging material chemistry and manufacturing at industrial scale.
+      </p>
+      <div class="about-visual-card" style="margin-top:0.5rem;">
+        <img src="https://images.samsung.com/is/image/samsung/assets/global/explore/brand/technology/tv-display/221018_QD-OLED-Desktop.jpg" alt="QD-OLED Display Technology" onerror="this.style.display='none'">
+        <div class="about-visual-label">
+          <strong>QD-OLED Technology</strong>
+          InP quantum dot optimization for next-generation displays at Samsung Display
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Research Areas -->
+<section id="research">
+  <div class="section-header reveal">
+    <div class="section-tag">02 — Research Focus</div>
+    <h2 class="section-title">Research <em>Areas</em></h2>
+  </div>
+  <div class="research-areas">
+    <div class="research-card reveal">
+      <div class="icon"><i class="fas fa-atom"></i></div>
+      <h3>Ion-Exchange Chemistry</h3>
+      <p>Phase-controlled synthesis of chalcogenide nanomaterials via cation/anion exchange using metastable Cu₂₋ₓS templates. Systematic exploration of compositional and structural spaces.</p>
+      <div class="research-tags">
+        <span class="research-tag">Cation Exchange</span>
+        <span class="research-tag">Anion Exchange</span>
+        <span class="research-tag">HSAB Theory</span>
+        <span class="research-tag">Metastable Phases</span>
+      </div>
+    </div>
+    <div class="research-card reveal">
+      <div class="icon"><i class="fas fa-cube"></i></div>
+      <h3>Phase &amp; Morphology Engineering</h3>
+      <p>Designing and building experimental nanomaterial libraries across phase, morphology, and composition spaces. Mapping transformation pathways during chemical and thermal conversion.</p>
+      <div class="research-tags">
+        <span class="research-tag">Phase Engineering</span>
+        <span class="research-tag">Crystal Structure</span>
+        <span class="research-tag">In-situ PXRD</span>
+        <span class="research-tag">Nanoframes</span>
+      </div>
+    </div>
+    <div class="research-card reveal">
+      <div class="icon"><i class="fas fa-bolt"></i></div>
+      <h3>Electrocatalysis</h3>
+      <p>Metal phosphides, chalcogenides, and heterostructure catalysts for HER, OER, ORR, and NRR. Sub-nanometer structure–activity analysis and AEMWE device integration.</p>
+      <div class="research-tags">
+        <span class="research-tag">HER / OER</span>
+        <span class="research-tag">Water Splitting</span>
+        <span class="research-tag">AEMWE</span>
+        <span class="research-tag">Heterostructures</span>
+      </div>
+    </div>
+    <div class="research-card reveal">
+      <div class="icon"><i class="fas fa-sun"></i></div>
+      <h3>Optoelectronics &amp; QD-OLED</h3>
+      <p>Perovskite nanocrystals for deep-blue LEDs, InP quantum dot optimization for display applications, and inkjet printing process development for QD-OLED manufacturing.</p>
+      <div class="research-tags">
+        <span class="research-tag">QD-OLED</span>
+        <span class="research-tag">Perovskite</span>
+        <span class="research-tag">InP QDs</span>
+        <span class="research-tag">Inkjet Printing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-tag">03 — Career Path</div>
+    <h2 class="section-title">Experience &amp; <em>Education</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot active"></div>
+      <div class="tl-date">Apr 2024 — Present</div>
+      <div class="tl-title">Staff Research Engineer</div>
+      <div class="tl-org">Samsung Display · Giheung, South Korea</div>
+      <ul class="tl-desc">
+        <li>Optimized InP core/shell QDs for QD-OLED applications — particle size, optical properties, and jetting compatibility</li>
+        <li>Built semi-automated data analysis workflows for rapid performance benchmarking</li>
+        <li>Panel-level evaluation, root-cause failure analysis, and manufacturing process refinement</li>
+        <li>Co-optimized with external material vendors for mass-production scale-up</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Mar 2023 — Mar 2024</div>
+      <div class="tl-title">Postdoctoral Researcher</div>
+      <div class="tl-org">Korea Institute of Science and Technology (KIST) · Advisor: Dr. Sung Jong Yoo</div>
+      <ul class="tl-desc">
+        <li>Developed synthesis and chemical transformation methodologies for metastable and inaccessible phases</li>
+        <li>Advanced structural, phase, and electrochemical analysis with crystal structure simulation</li>
+        <li>AEMWE device-level application bridging material synthesis with system implementation</li>
+        <li>Pilot-scale synthesis and lab-to-pilot scale production optimization</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Mar 2017 — Feb 2023</div>
+      <div class="tl-title">M.S./Ph.D. in Inorganic Chemistry</div>
+      <div class="tl-org">Korea University · Advisor: Prof. Kwangyeol Lee</div>
+      <ul class="tl-desc">
+        <li>Synthesized alloy metal nanoframes and ionic nanomaterials (sulfides, phosphides) with phase/morphology control</li>
+        <li>Applied HR-TEM, in-situ PXRD, XPS, PL, XAS for structure–property relationship studies</li>
+        <li>Bridged material synthesis to catalysis and optoelectronics device applications</li>
+        <li>Published 12 first-author papers in top-tier journals</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Mar 2012 — Feb 2017</div>
+      <div class="tl-title">B.S. in Chemistry</div>
+      <div class="tl-org">Korea University · Seoul, South Korea</div>
+      <ul class="tl-desc">
+        <li>Undergraduate research in inorganic nanocrystal synthesis and catalysis</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-tag">04 — Technical Expertise</div>
+    <h2 class="section-title">Skills &amp; <em>Instrumentation</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <h3><span class="cat-icon"><i class="fas fa-flask"></i></span> Synthesis Techniques</h3>
+      <div class="skill-item">Colloidal / Wet-Chemical Synthesis <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-item">Cation / Anion Exchange <div class="skill-bar-wrap"><div class="skill-bar" style="width:98%"></div></div></div>
+      <div class="skill-item">Schlenk Line Techniques <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+      <div class="skill-item">Hydro/Solvothermal Synthesis <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item">Phase Conversion / Thermal Annealing <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+    </div>
+    <div class="skill-category reveal">
+      <h3><span class="cat-icon"><i class="fas fa-microscope"></i></span> Characterization</h3>
+      <div class="skill-item">HR-TEM / STEM (operation) <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-item">PXRD / In-situ PXRD <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-item">SEM / EDS <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item">XPS / XANES / EXAFS <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item">PL / PLQY / UV-Vis <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+    </div>
+    <div class="skill-category reveal">
+      <h3><span class="cat-icon"><i class="fas fa-chart-line"></i></span> Analysis & Modeling</h3>
+      <div class="skill-item">Crystal Structure Simulation <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+      <div class="skill-item">CrystalMaker / VESTA <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item">HRTEM FFT Interpretation <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-item">Cyclic Voltammetry <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item">DOE / Regression Modeling <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+    </div>
+    <div class="skill-category reveal">
+      <h3><span class="cat-icon"><i class="fas fa-industry"></i></span> Process & Scale-up</h3>
+      <div class="skill-item">QD-OLED Process R&D <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item">Inkjet Printing / Jetting <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item">Vendor Co-optimization <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item">Pilot-scale Production <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+      <div class="skill-item">Excel VBA / Spotfire <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+  <div class="section-header reveal">
+    <div class="section-tag">05 — Research Output</div>
+    <h2 class="section-title">Selected <em>Publications</em></h2>
+  </div>
+  <p style="text-align:center; color:var(--text-muted); margin-bottom:2.5rem; font-size:0.88rem;" class="reveal">
+    † denotes first-author / equal contribution · 12 first-author + 4 co-author papers
+  </p>
+  <div class="pub-list">
+
+    <div class="pub-item reveal">
+      <div class="pub-num">01</div>
+      <div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202400610" target="_blank">† Se-assisted Modulation of Electronic Structure of Ruthenium Phosphide Nanotubes for Efficient Alkaline HER</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Eunsoo Lee†, Jae Hun Seol†, Tae Kyung Lee†, Songa Choi, Seong Chan Cho, Taekyung Kim, Hionsuck Baik, Sangyeon Jeong, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Small Science · 2025, 5, 2400610</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">02</div>
+      <div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202409736" target="_blank">Colloidal Perovskite Nanocrystals for Blue-Light-Emitting Diodes and Displays</a></div>
+        <div class="pub-authors">M. Aftabuzzaman, <strong>Yongju Hong</strong>, Sangyeon Jeong, Gracita M. Tomboc, Kwangyeol Lee*</div>
+        <div class="pub-journal">Advanced Science · 2025, 12, 2409736</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">03</div>
+      <div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/aenm.202401426" target="_blank">† Ru₂P/Ir₂P Heterostructure Promotes Hydrogen Spillover for Efficient Alkaline HER</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Sangyeon Jeong, Jae Hun Seol, Taekyung Kim, Seong Chan Cho, Tae Kyung Lee, Chaeyoen Yang, Hionsuck Baik, Hyun S. Park, Eunsoo Lee, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Advanced Energy Materials · 2024, 14, 2401426 <span class="pub-badge">Inside Back Cover</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">04</div>
+      <div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/aenm.202304269" target="_blank">† Double-walled Tubular Heusler-type Platinum–Ruthenium Phosphide as All-pH HER Catalyst</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Seong Chan Cho, Soobean Kim, Haneul Jin, Jae Hun Seol, Tae Kyung Lee, Jong-kyeong Ryu, Gracita M. Tomboc, Taekyung Kim, Hionsuck Baik, Changhyeok Choi, Jinhyoung Jo, Sangyeon Jeong, Eunsoo Lee, Yousung Jung, Docheon Ahn, Yong-Tae Kim, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Advanced Energy Materials · 2024, 14, 2304269 <span class="pub-badge">Back Cover</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">05</div>
+      <div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202302906" target="_blank">† Perovskite Nanocrystals Protected by Hermetically Sealing for Highly Bright Deep-Blue LEDs</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Chungman Yu, Hyeondoo Je, Jin Young Park, Taekyung Kim, Hionsuck Baik, Gracita M. Tomboc, Youngseo Kim, Jung Min Ha, Jinwhan Joo, Chai Won Kim, Han Young Woo, Sungnam Park, Dong Hoon Choi*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Advanced Science · 2023, 10, 2302906</div>
+      </div>
+    </div>
+
+    <!-- Hidden publications -->
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">06</div>
+      <div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/smsc.202200063" target="_blank">† Regiospecific Cation Exchange in Nanocrystals and its Potential in Diversifying the Nanostructural Library</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Sandhya Venkateshalu†, Sangyeon Jeong, Jongsik Park*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Small Science · 2023, 3, 2200063</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">07</div>
+      <div>
+        <div class="pub-title"><a href="https://doi.org/10.1002/bkcs.12638" target="_blank">† Galvanic Replacement Reaction to Prepare Catalytic Materials</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Sandhya Venkateshalu†, Sangyeon Jeong†, Gracita M. Tomboc, Jinhyoung Jo, Jongsik Park*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Bulletin of the Korean Chemical Society · 2023, 44, 4–22</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">08</div>
+      <div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acscatal.2c03527" target="_blank">Directing the Surface Atomic Geometry on Copper Sulfide for Enhanced Electrochemical NRR</a></div>
+        <div class="pub-authors">Haneul Jin†, Hee Soo Kim†, Chi Ho Lee, <strong>Yongju Hong</strong>, Jihyun Choi, Hionsuck Baik, Sang Uck Lee, Sung Jong Yoo*, Kwangyeol Lee*, Hyun S. Park*</div>
+        <div class="pub-journal">ACS Catalysis · 2022, 12, 15048–15059 <span class="pub-badge">Front Cover</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">09</div>
+      <div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.0c02891" target="_blank">† Highly Crystalline Hollow Toroidal Copper Phosphosulfide via Anion Exchange</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Taekyung Kim, Jinhyoung Jo, Byeongyoon Kim, Haneul Jin, Hionsuck Baik, Kwangyeol Lee*</div>
+        <div class="pub-journal">ACS Nano · 2020, 14, 11205–11214 <span class="pub-badge">Back Cover</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">10</div>
+      <div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.9b07787" target="_blank">† Janus to Core–Shell to Janus: Facile Cation Movement in Cu₂₋ₓS/Ag₂S Hexagonal Nanoplates</a></div>
+        <div class="pub-authors">Taekyung Kim†, Jongsik Park†, <strong>Yongju Hong†</strong>, Aram Oh, Hionsuck Baik, Kwangyeol Lee*</div>
+        <div class="pub-journal">ACS Nano · 2019, 13, 11834–11842</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;">
+      <div class="pub-num">11</div>
+      <div>
+        <div class="pub-title"><a href="https://doi.org/10.1016/j.nanoen.2017.04.009" target="_blank">† Lanthanide Metal-Assisted Synthesis of Rhombic Dodecahedral MNi Nanoframes for OER</a></div>
+        <div class="pub-authors">Haneul Jin†, <strong>Yongju Hong†</strong>, Jaemin Yoon, Aram Oh, N. K. Chaudhari, Hionsuck Baik, Sang Hoon Joo*, Kwangyeol Lee*</div>
+        <div class="pub-journal">Nano Energy · 2017, 42, 17–25</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pub-toggle reveal">
+    <button onclick="togglePubs()" id="pubBtn">Show All Publications</button>
+  </div>
+</section>
+
+<!-- Awards -->
+<section id="awards" style="background:var(--bg-secondary); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-header reveal">
+    <div class="section-tag">06 — Recognition</div>
+    <h2 class="section-title">Awards &amp; <em>Scholarships</em></h2>
+  </div>
+  <div class="awards-grid">
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-star"></i></div>
+      <div class="award-text">
+        <h4>Sejong Science Scholarship</h4>
+        <div class="award-org">National Research Foundation, South Korea</div>
+        <div class="award-year">2025</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-globe"></i></div>
+      <div class="award-text">
+        <h4>Global Ph.D. Fellowship (GPF)</h4>
+        <div class="award-org">National Research Foundation — 5 years</div>
+        <div class="award-year">2018 – 2023</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-award"></i></div>
+      <div class="award-text">
+        <h4>Samsung Display Scholarship</h4>
+        <div class="award-org">Samsung Display, South Korea</div>
+        <div class="award-year">2021</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-trophy"></i></div>
+      <div class="award-text">
+        <h4>Best Poster Award (International)</h4>
+        <div class="award-org">6th Nano Today Conference, Portugal</div>
+        <div class="award-year">2019</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-medal"></i></div>
+      <div class="award-text">
+        <h4>KU Achievement Award</h4>
+        <div class="award-org">Korea University</div>
+        <div class="award-year">2023</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-certificate"></i></div>
+      <div class="award-text">
+        <h4>Excellent Research Paper Award (×3)</h4>
+        <div class="award-org">BK21, Korea University</div>
+        <div class="award-year">2020 – 2022</div>
+      </div>
+    </div>
+    <div class="award-item reveal">
+      <div class="award-icon"><i class="fas fa-trophy"></i></div>
+      <div class="award-text">
+        <h4>Best Poster Presentation (×3)</h4>
+        <div class="award-org">KCS General Meeting / Symposiums</div>
+        <div class="award-year">2020 – 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Patents -->
+<section id="patents">
+  <div class="section-header reveal">
+    <div class="section-tag">07 — Intellectual Property</div>
+    <h2 class="section-title"><em>Patents</em></h2>
+  </div>
+  <div class="patent-list">
+    <div class="patent-item reveal">
+      <div class="patent-icon"><i class="fas fa-lightbulb"></i></div>
+      <div class="patent-text">
+        <h4>Method for Manufacturing Core–Shell Structured Perovskite Nanoparticles and Light-Emitting Devices</h4>
+        <p>Application No. 10-2022-0113517</p>
+      </div>
+    </div>
+    <div class="patent-item reveal">
+      <div class="patent-icon"><i class="fas fa-lightbulb"></i></div>
+      <div class="patent-text">
+        <h4>Electrocatalyst with Excellent Electrochemical Activity and Durability for Water Electrolysis (I)</h4>
+        <p>Application No. 10-2024-0106213</p>
+      </div>
+    </div>
+    <div class="patent-item reveal">
+      <div class="patent-icon"><i class="fas fa-lightbulb"></i></div>
+      <div class="patent-text">
+        <h4>Electrocatalyst with Excellent Electrochemical Activity and Durability for Water Electrolysis (II)</h4>
+        <p>Application No. 10-2024-0106385</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-header reveal" style="text-align:center;">
+    <div class="section-tag" style="justify-content:center;">08 — Let's Connect</div>
+    <h2 class="section-title">Get in <em>Touch</em></h2>
+    <div class="postdoc-banner">
+      <p><span class="highlight-text">Actively seeking postdoctoral opportunities in the U.S.</span><br>
+      Open to collaborations and conversations about nanomaterials, ion-exchange chemistry, electrocatalysis, and scaling science from lab to device.</p>
+    </div>
+  </div>
+  <div class="contact-links reveal">
+    <a href="mailto:yongju5138@gmail.com" class="contact-card">
+      <i class="fas fa-envelope"></i> yongju5138@gmail.com
+    </a>
+    <a href="https://linkedin.com/in/yongjuhong" target="_blank" class="contact-card">
+      <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://scholar.google.com" target="_blank" class="contact-card">
+      <i class="fas fa-graduation-cap"></i> Google Scholar
+    </a>
+    <a href="https://yongjuhong.github.io" target="_blank" class="contact-card">
+      <i class="fab fa-github"></i> yongjuhong.github.io
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 Yongju Hong. All rights reserved.</p>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Toggle publications
+let pubsShown = false;
+function togglePubs() {
+  pubsShown = !pubsShown;
+  const hiddenPubs = document.querySelectorAll('.pub-hidden');
+  hiddenPubs.forEach(el => el.style.display = pubsShown ? 'grid' : 'none');
+  document.getElementById('pubBtn').textContent = pubsShown ? 'Show Less' : 'Show All Publications';
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
