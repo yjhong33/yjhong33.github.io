@@ -451,7 +451,7 @@ section {
 
 .about-statement h3 {
   font-family: var(--serif);
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 0.8rem;
@@ -578,6 +578,44 @@ section {
   background: rgba(86,212,224,0.08);
   color: var(--accent-dim);
   letter-spacing: 0.5px;
+}
+
+.research-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: min(560px, 42vw);
+  background: rgba(19, 23, 32, 0.96);
+  border: 1px solid rgba(86,212,224,0.22);
+  border-radius: 16px;
+  box-shadow: 0 22px 60px rgba(0,0,0,0.38);
+  padding: 0.8rem;
+  z-index: 1500;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(18px, 18px, 0) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.research-preview.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.research-preview img {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #0b0e14;
+}
+
+.research-preview .caption {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
 
 /* ===== TIMELINE ===== */
@@ -728,6 +766,7 @@ section {
   grid-template-columns: 48px 1fr;
   gap: 1.2rem;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .pub-item:hover {
@@ -1045,6 +1084,7 @@ footer {
   .hero-stats { gap: 1.5rem; }
   .hero-stat .num { font-size: 2rem; }
   .research-areas { grid-template-columns: 1fr; }
+  .research-preview { display: none; }
   .pub-item { grid-template-columns: 36px 1fr; gap: 0.8rem; }
   .awards-grid { grid-template-columns: 1fr; }
   .contact-links { flex-direction: column; align-items: center; }
@@ -1199,7 +1239,7 @@ footer {
       </div>
       <div class="about-statement">
         <h3>Ion-Exchange-Driven Phase Engineering: From Experimental Rules Toward Synthesis Prediction</h3>
-        <p style="color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+        <p style="color:var(--text-secondary); font-size:0.94rem; line-height:1.85; max-width: 72ch;">
           Mapping chemical transformation pathways in metastable nanomaterials — bridging fundamental phase–structure relationships with scalable device applications.
         </p>
       </div>
@@ -1209,15 +1249,18 @@ footer {
   <div class="about-text-section reveal">
     <div class="about-text-col">
       <p>
-        I am an inorganic chemist and nanoscientist with deep expertise in the synthesis, chemical transformation, and structural characterization of functional nanomaterials. My research centers on using metastable templates — particularly Cu₂₋ₓS — for phase-controlled discovery of new nanomaterials via cation/anion exchange routes.
+        I am an inorganic chemist and nanoscientist working at the interface of nanocrystal synthesis, chemical transformation, and structural characterization. My research uses metastable templates — especially Cu₂₋ₓS — to discover and control new phases through cation and anion exchange.
       </p>
       <p>
-        With crystallographic design rules (anion-sublattice preservation, lattice-mismatch tolerance, HSAB principles) as the underlying framework, I map the relationships between phase, structure, and function across compositional, morphological, and structural spaces.
+        Guided by crystallographic design principles, including anion-sublattice preservation, lattice-mismatch tolerance, and HSAB concepts, I investigate how phase, structure, and morphology evolve across compositional spaces.
       </p>
     </div>
     <div class="about-text-col">
       <p>
-        Currently, I work at Samsung Display as a Staff Research Engineer, optimizing InP-based quantum dots for QD-OLED applications — bridging material chemistry and manufacturing at industrial scale.
+        More broadly, I aim to translate these experimental insights into predictive synthesis rules for functional nanomaterials and scalable optoelectronic platforms.
+      </p>
+      <p>
+        Currently, I work at Samsung Display as a Staff Research Engineer, optimizing InP-based quantum dots for QD-OLED applications and connecting materials chemistry with industrial manufacturing.
       </p>
       <div class="about-visual-card" style="margin-top:0.5rem;">
         <img src="https://images.samsung.com/is/image/samsung/assets/global/explore/brand/technology/tv-display/221018_QD-OLED-Desktop.jpg" alt="QD-OLED Display Technology" onerror="this.style.display='none'">
@@ -1237,7 +1280,7 @@ footer {
     <h2 class="section-title">Research <em>Areas</em></h2>
   </div>
   <div class="research-areas">
-    <div class="research-card reveal">
+    <div class="research-card reveal" data-preview="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B71.png" data-caption="Ion-exchange-mediated hollow nanoframe evolution and atomic-scale phase segregation.">
       <div class="icon"><i class="fas fa-atom"></i></div>
       <h3>Ion-Exchange Chemistry</h3>
       <p>Phase-controlled synthesis of chalcogenide nanomaterials via cation/anion exchange using metastable Cu₂₋ₓS templates. Systematic exploration of compositional and structural spaces.</p>
@@ -1248,7 +1291,7 @@ footer {
         <span class="research-tag">Metastable Phases</span>
       </div>
     </div>
-    <div class="research-card reveal">
+    <div class="research-card reveal" data-preview="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B72.gif" data-caption="3D morphology reconstruction for phase and morphology evolution in complex nanostructures.">
       <div class="icon"><i class="fas fa-cube"></i></div>
       <h3>Phase &amp; Morphology Engineering</h3>
       <p>Designing and building experimental nanomaterial libraries across phase, morphology, and composition spaces. Mapping transformation pathways during chemical and thermal conversion.</p>
@@ -1259,7 +1302,7 @@ footer {
         <span class="research-tag">Nanoframes</span>
       </div>
     </div>
-    <div class="research-card reveal">
+    <div class="research-card reveal" data-preview="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B73.png" data-caption="Structure–performance relationships in AEMWE electrocatalysts and device-level benchmarking.">
       <div class="icon"><i class="fas fa-bolt"></i></div>
       <h3>Electrocatalysis</h3>
       <p>Metal phosphides, chalcogenides, and heterostructure catalysts for HER, OER, ORR, and NRR. Sub-nanometer structure–activity analysis and AEMWE device integration.</p>
@@ -1270,7 +1313,7 @@ footer {
         <span class="research-tag">Heterostructures</span>
       </div>
     </div>
-    <div class="research-card reveal">
+    <div class="research-card reveal" data-preview="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B74.png" data-caption="Deep-blue optoelectronic device architecture and emission performance for QD and perovskite systems.">
       <div class="icon"><i class="fas fa-sun"></i></div>
       <h3>Optoelectronics &amp; QD-OLED</h3>
       <p>Perovskite nanocrystals for deep-blue LEDs, InP quantum dot optimization for display applications, and inkjet printing process development for QD-OLED manufacturing.</p>
@@ -1283,6 +1326,11 @@ footer {
     </div>
   </div>
 </section>
+
+<div class="research-preview" id="researchPreview" aria-hidden="true">
+  <img id="researchPreviewImg" src="" alt="Research area preview">
+  <div class="caption" id="researchPreviewCaption"></div>
+</div>
 
 <!-- Experience -->
 <section id="experience">
@@ -1392,102 +1440,146 @@ footer {
   </p>
   <div class="pub-list">
 
-    <div class="pub-item reveal">
+    <div class="pub-item reveal" data-href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202400610">
       <div class="pub-num">01</div>
       <div>
-        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202400610" target="_blank">† Se-assisted Modulation of Electronic Structure of Ruthenium Phosphide Nanotubes for Efficient Alkaline HER</a></div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202400610" target="_blank" rel="noopener noreferrer">† Se-assisted Modulation of Electronic Structure of Ruthenium Phosphide Nanotubes for Efficient Alkaline HER</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Eunsoo Lee†, Jae Hun Seol†, Tae Kyung Lee†, Songa Choi, Seong Chan Cho, Taekyung Kim, Hionsuck Baik, Sangyeon Jeong, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
         <div class="pub-journal">Small Science · 2025, 5, 2400610</div>
       </div>
     </div>
 
-    <div class="pub-item reveal">
+    <div class="pub-item reveal" data-href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202409736">
       <div class="pub-num">02</div>
       <div>
-        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202409736" target="_blank">Colloidal Perovskite Nanocrystals for Blue-Light-Emitting Diodes and Displays</a></div>
-        <div class="pub-authors">M. Aftabuzzaman, <strong>Yongju Hong</strong>, Sangyeon Jeong, Gracita M. Tomboc, Kwangyeol Lee*</div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202409736" target="_blank" rel="noopener noreferrer">Colloidal Perovskite Nanocrystals for Blue-Light-Emitting Diodes and Displays</a></div>
+        <div class="pub-authors">M. Aftabuzzaman, <strong>Yongju Hong</strong>, S. Jeong, R. Levan, S. J. Lee, D. H. Choi, K. Lee*</div>
         <div class="pub-journal">Advanced Science · 2025, 12, 2409736</div>
       </div>
     </div>
 
-    <div class="pub-item reveal">
+    <div class="pub-item reveal" data-href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202401426">
       <div class="pub-num">03</div>
       <div>
-        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/aenm.202401426" target="_blank">† Ru₂P/Ir₂P Heterostructure Promotes Hydrogen Spillover for Efficient Alkaline HER</a></div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202401426" target="_blank" rel="noopener noreferrer">† Ru₂P/Ir₂P Heterostructure Promotes Hydrogen Spillover for Efficient Alkaline HER</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Sangyeon Jeong, Jae Hun Seol, Taekyung Kim, Seong Chan Cho, Tae Kyung Lee, Chaeyoen Yang, Hionsuck Baik, Hyun S. Park, Eunsoo Lee, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
         <div class="pub-journal">Advanced Energy Materials · 2024, 14, 2401426 <span class="pub-badge">Inside Back Cover</span></div>
       </div>
     </div>
 
-    <div class="pub-item reveal">
+    <div class="pub-item reveal" data-href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202304269">
       <div class="pub-num">04</div>
       <div>
-        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/aenm.202304269" target="_blank">† Double-walled Tubular Heusler-type Platinum–Ruthenium Phosphide as All-pH HER Catalyst</a></div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202304269" target="_blank" rel="noopener noreferrer">† Double-Walled Tubular Heusler-Type Platinum–Ruthenium Phosphide as All-pH Hydrogen Evolution Reaction Catalyst Outperforming Platinum and Ruthenium</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Seong Chan Cho, Soobean Kim, Haneul Jin, Jae Hun Seol, Tae Kyung Lee, Jong-kyeong Ryu, Gracita M. Tomboc, Taekyung Kim, Hionsuck Baik, Changhyeok Choi, Jinhyoung Jo, Sangyeon Jeong, Eunsoo Lee, Yousung Jung, Docheon Ahn, Yong-Tae Kim, Sung Jong Yoo*, Sang Uck Lee*, Kwangyeol Lee*</div>
         <div class="pub-journal">Advanced Energy Materials · 2024, 14, 2304269 <span class="pub-badge">Back Cover</span></div>
       </div>
     </div>
 
-    <div class="pub-item reveal">
+    <div class="pub-item reveal" data-href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202302906">
       <div class="pub-num">05</div>
       <div>
-        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202302906" target="_blank">† Perovskite Nanocrystals Protected by Hermetically Sealing for Highly Bright Deep-Blue LEDs</a></div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202302906" target="_blank" rel="noopener noreferrer">† Perovskite Nanocrystals Protected by Hermetically Sealing for Highly Bright and Stable Deep-Blue Light-Emitting Diodes</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Chungman Yu, Hyeondoo Je, Jin Young Park, Taekyung Kim, Hionsuck Baik, Gracita M. Tomboc, Youngseo Kim, Jung Min Ha, Jinwhan Joo, Chai Won Kim, Han Young Woo, Sungnam Park, Dong Hoon Choi*, Kwangyeol Lee*</div>
         <div class="pub-journal">Advanced Science · 2023, 10, 2302906</div>
       </div>
     </div>
 
-    <!-- Hidden publications -->
-    <div class="pub-item pub-hidden" style="display:none;">
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://link.springer.com/article/10.1186/s42649-023-00092-7">
       <div class="pub-num">06</div>
       <div>
-        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/smsc.202200063" target="_blank">† Regiospecific Cation Exchange in Nanocrystals and its Potential in Diversifying the Nanostructural Library</a></div>
+        <div class="pub-title"><a href="https://link.springer.com/article/10.1186/s42649-023-00092-7" target="_blank" rel="noopener noreferrer">Three-Dimensional Reconstruction of Y-IrNi Rhombic Dodecahedron Nanoframe by STEM/EDS Tomography</a></div>
+        <div class="pub-authors">T. Kim, Y. Lee, <strong>Yongju Hong</strong>, K. Lee, H. Baik*</div>
+        <div class="pub-journal">Applied Microscopy · 2023, 53, 9</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202200063">
+      <div class="pub-num">07</div>
+      <div>
+        <div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/smsc.202200063" target="_blank" rel="noopener noreferrer">† Regiospecific Cation Exchange in Nanocrystals and its Potential in Diversifying the Nanostructural Library</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Sandhya Venkateshalu†, Sangyeon Jeong, Jongsik Park*, Kwangyeol Lee*</div>
         <div class="pub-journal">Small Science · 2023, 3, 2200063</div>
       </div>
     </div>
 
-    <div class="pub-item pub-hidden" style="display:none;">
-      <div class="pub-num">07</div>
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://doi.org/10.1002/bkcs.12638">
+      <div class="pub-num">08</div>
       <div>
-        <div class="pub-title"><a href="https://doi.org/10.1002/bkcs.12638" target="_blank">† Galvanic Replacement Reaction to Prepare Catalytic Materials</a></div>
-        <div class="pub-authors"><strong>Yongju Hong†</strong>, Sandhya Venkateshalu†, Sangyeon Jeong†, Gracita M. Tomboc, Jinhyoung Jo, Jongsik Park*, Kwangyeol Lee*</div>
+        <div class="pub-title"><a href="https://doi.org/10.1002/bkcs.12638" target="_blank" rel="noopener noreferrer">† Galvanic Replacement Reaction to Prepare Catalytic Materials</a></div>
+        <div class="pub-authors"><strong>Yongju Hong†</strong>, Sandhya Venkateshalu†, Sangyeon Jeong, Gracita M. Tomboc, Jinhyoung Jo, Jongsik Park, Kwangyeol Lee*</div>
         <div class="pub-journal">Bulletin of the Korean Chemical Society · 2023, 44, 4–22</div>
       </div>
     </div>
 
-    <div class="pub-item pub-hidden" style="display:none;">
-      <div class="pub-num">08</div>
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.acs.org/doi/10.1021/acscatal.2c03527">
+      <div class="pub-num">09</div>
       <div>
-        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acscatal.2c03527" target="_blank">Directing the Surface Atomic Geometry on Copper Sulfide for Enhanced Electrochemical NRR</a></div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acscatal.2c03527" target="_blank" rel="noopener noreferrer">Directing the Surface Atomic Geometry on Copper Sulfide for Enhanced Electrochemical Nitrogen Reduction</a></div>
         <div class="pub-authors">Haneul Jin†, Hee Soo Kim†, Chi Ho Lee, <strong>Yongju Hong</strong>, Jihyun Choi, Hionsuck Baik, Sang Uck Lee, Sung Jong Yoo*, Kwangyeol Lee*, Hyun S. Park*</div>
-        <div class="pub-journal">ACS Catalysis · 2022, 12, 15048–15059 <span class="pub-badge">Front Cover</span></div>
+        <div class="pub-journal">ACS Catalysis · 2022, 12, 13638–13648 <span class="pub-badge">Front Cover</span></div>
       </div>
     </div>
 
-    <div class="pub-item pub-hidden" style="display:none;">
-      <div class="pub-num">09</div>
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.rsc.org/en/content/articlelanding/2022/ee/d1ee02636d">
+      <div class="pub-num">10</div>
       <div>
-        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.0c02891" target="_blank">† Highly Crystalline Hollow Toroidal Copper Phosphosulfide via Anion Exchange</a></div>
+        <div class="pub-title"><a href="https://pubs.rsc.org/en/content/articlelanding/2022/ee/d1ee02636d" target="_blank" rel="noopener noreferrer">Safeguarding the RuO₂ Phase against Lattice Oxygen Oxidation during Acidic Water Electrooxidation</a></div>
+        <div class="pub-authors">H. Jin, S. Choi, G. J. Bang, T. Kwon, H. S. Kim, S. J. Lee, <strong>Yongju Hong</strong>, D. W. Lee, H. S. Park, H. Baik, Y. Jung*, S. J. Yoo*, K. Lee*</div>
+        <div class="pub-journal">Energy &amp; Environmental Science · 2022, 15, 1119–1130 <span class="pub-badge">Back Cover</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.rsc.org/en/content/articlelanding/2022/tc/d2tc01113a">
+      <div class="pub-num">11</div>
+      <div>
+        <div class="pub-title"><a href="https://pubs.rsc.org/en/content/articlelanding/2022/tc/d2tc01113a" target="_blank" rel="noopener noreferrer">Solvent Mediated Thermodynamically Favorable Helical Supramolecular Self-Assembly: Recognition Behavior towards Achiral and Chiral Analytes</a></div>
+        <div class="pub-authors">M. Kataria, Y. Kim, H. D. Chau, N. Y. Kwon, <strong>Yongju Hong</strong>, T. Kim, J. Ko, M. K. Son, J. Bang, S. Park, H. I. Kim, K. Lee, D. H. Choi*</div>
+        <div class="pub-journal">Journal of Materials Chemistry C · 2022, 10, 10679–10685</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202002049">
+      <div class="pub-num">12</div>
+      <div>
+        <div class="pub-title"><a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202002049" target="_blank" rel="noopener noreferrer">Highly Stable Pt-Based Ternary Systems for Oxygen Reduction Reaction in Acidic Electrolytes</a></div>
+        <div class="pub-authors">J. Kim, <strong>Yongju Hong</strong>, K. Lee*, J. Y. Kim*</div>
+        <div class="pub-journal">Advanced Energy Materials · 2020, 10, 2002049</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.acs.org/doi/10.1021/acsnano.0c02891">
+      <div class="pub-num">13</div>
+      <div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.0c02891" target="_blank" rel="noopener noreferrer">† Highly Crystalline Hollow Toroidal Copper Phosphosulfide via Anion Exchange: A Versatile Cation Exchange Nanoplatform</a></div>
         <div class="pub-authors"><strong>Yongju Hong†</strong>, Taekyung Kim, Jinhyoung Jo, Byeongyoon Kim, Haneul Jin, Hionsuck Baik, Kwangyeol Lee*</div>
         <div class="pub-journal">ACS Nano · 2020, 14, 11205–11214 <span class="pub-badge">Back Cover</span></div>
       </div>
     </div>
 
-    <div class="pub-item pub-hidden" style="display:none;">
-      <div class="pub-num">10</div>
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.acs.org/doi/10.1021/acsnano.9b07787">
+      <div class="pub-num">14</div>
       <div>
-        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.9b07787" target="_blank">† Janus to Core–Shell to Janus: Facile Cation Movement in Cu₂₋ₓS/Ag₂S Hexagonal Nanoplates</a></div>
-        <div class="pub-authors">Taekyung Kim†, Jongsik Park†, <strong>Yongju Hong†</strong>, Aram Oh, Hionsuck Baik, Kwangyeol Lee*</div>
+        <div class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acsnano.9b07787" target="_blank" rel="noopener noreferrer">Janus to Core–Shell to Janus: Facile Cation Movement in Cu₂₋ₓS/Ag₂S Hexagonal Nanoplates Induced by Surface Strain Control</a></div>
+        <div class="pub-authors">Taekyung Kim†, Jongsik Park†, <strong>Yongju Hong</strong>, Aram Oh, Hionsuck Baik, Kwangyeol Lee*</div>
         <div class="pub-journal">ACS Nano · 2019, 13, 11834–11842</div>
       </div>
     </div>
 
-    <div class="pub-item pub-hidden" style="display:none;">
-      <div class="pub-num">11</div>
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://pubs.rsc.org/en/content/articlelanding/2019/ta/c9ta05309c">
+      <div class="pub-num">15</div>
       <div>
-        <div class="pub-title"><a href="https://doi.org/10.1016/j.nanoen.2017.04.009" target="_blank">† Lanthanide Metal-Assisted Synthesis of Rhombic Dodecahedral MNi Nanoframes for OER</a></div>
-        <div class="pub-authors">Haneul Jin†, <strong>Yongju Hong†</strong>, Jaemin Yoon, Aram Oh, N. K. Chaudhari, Hionsuck Baik, Sang Hoon Joo*, Kwangyeol Lee*</div>
+        <div class="pub-title"><a href="https://pubs.rsc.org/en/content/articlelanding/2019/ta/c9ta05309c" target="_blank" rel="noopener noreferrer">Pt–Cu Based Nanocrystals as Promising Catalysts for Various Electrocatalytic Reactions</a></div>
+        <div class="pub-authors">N. K. Chaudhari, <strong>Yongju Hong</strong>, B. Kim, S.-I. Choi*, K. Lee*</div>
+        <div class="pub-journal">Journal of Materials Chemistry A · 2019, 7, 17183–17203</div>
+      </div>
+    </div>
+
+    <div class="pub-item pub-hidden" style="display:none;" data-href="https://doi.org/10.1016/j.nanoen.2017.04.009">
+      <div class="pub-num">16</div>
+      <div>
+        <div class="pub-title"><a href="https://doi.org/10.1016/j.nanoen.2017.04.009" target="_blank" rel="noopener noreferrer">Lanthanide Metal-Assisted Synthesis of Rhombic Dodecahedral MNi (M = Ir and Pt) Nanoframes toward Efficient Oxygen Evolution Catalysis</a></div>
+        <div class="pub-authors">Haneul Jin, <strong>Yongju Hong</strong>, Jaemin Yoon, Aram Oh, N. K. Chaudhari, Hionsuck Baik, Sang Hoon Joo*, Kwangyeol Lee*</div>
         <div class="pub-journal">Nano Energy · 2017, 42, 17–25</div>
       </div>
     </div>
@@ -1612,11 +1704,11 @@ footer {
     <a href="https://linkedin.com/in/yongjuhong" target="_blank" class="contact-card">
       <i class="fab fa-linkedin"></i> LinkedIn
     </a>
-    <a href="https://scholar.google.com/citations?user=ZmwTpskAAAAJ&hl=ko&oi=ao" target="_blank" class="contact-card">
+    <a href="https://scholar.google.com" target="_blank" class="contact-card">
       <i class="fas fa-graduation-cap"></i> Google Scholar
     </a>
-    <a href="https://yjhong33.github.io" target="_blank" class="contact-card">
-      <i class="fab fa-github"></i> yjhong33.github.io
+    <a href="https://yongjuhong.github.io" target="_blank" class="contact-card">
+      <i class="fab fa-github"></i> yongjuhong.github.io
     </a>
   </div>
 </section>
@@ -1658,6 +1750,15 @@ function togglePubs() {
   document.getElementById('pubBtn').textContent = pubsShown ? 'Show Less' : 'Show All Publications';
 }
 
+// Make publication cards clickable
+document.querySelectorAll('.pub-item[data-href]').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    const href = card.getAttribute('data-href');
+    if (href) window.open(href, '_blank', 'noopener');
+  });
+});
+
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -1670,5 +1771,48 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 
+<script>
+const researchPreview = document.getElementById('researchPreview');
+const researchPreviewImg = document.getElementById('researchPreviewImg');
+const researchPreviewCaption = document.getElementById('researchPreviewCaption');
+const researchCards = document.querySelectorAll('.research-card[data-preview]');
+
+function positionResearchPreview(event) {
+  if (!researchPreview || window.innerWidth <= 900) return;
+  const offset = 24;
+  const previewWidth = researchPreview.offsetWidth || Math.min(window.innerWidth * 0.42, 560);
+  const previewHeight = researchPreview.offsetHeight || 360;
+  let x = event.clientX + offset;
+  let y = event.clientY + offset;
+
+  if (x + previewWidth > window.innerWidth - 16) {
+    x = event.clientX - previewWidth - offset;
+  }
+  if (y + previewHeight > window.innerHeight - 16) {
+    y = window.innerHeight - previewHeight - 16;
+  }
+  if (y < 16) y = 16;
+  if (x < 16) x = 16;
+
+  researchPreview.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1)`;
+}
+
+researchCards.forEach(card => {
+  card.addEventListener('mouseenter', (event) => {
+    const previewSrc = card.dataset.preview;
+    const previewCaption = card.dataset.caption || '';
+    researchPreviewImg.src = previewSrc;
+    researchPreviewCaption.textContent = previewCaption;
+    researchPreview.classList.add('active');
+    positionResearchPreview(event);
+  });
+
+  card.addEventListener('mousemove', positionResearchPreview);
+
+  card.addEventListener('mouseleave', () => {
+    researchPreview.classList.remove('active');
+  });
+});
+</script>
 </body>
 </html>
