@@ -612,6 +612,24 @@ section {
   background: #0b0e14;
 }
 
+.research-preview-media {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.research-preview-media.single {
+  grid-template-columns: 1fr;
+}
+
+.research-preview-media.gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.research-preview-media.gallery img {
+  max-height: 220px;
+  aspect-ratio: 1 / 1;
+}
+
 .research-preview .caption {
   margin-top: 0.6rem;
   font-size: 0.8rem;
@@ -1292,7 +1310,7 @@ footer {
         <span class="research-tag">Metastable Phases</span>
       </div>
     </div>
-    <div class="research-card reveal" data-preview="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B72.gif" data-caption="3D morphology reconstruction for phase and morphology evolution in complex nanostructures.">
+    <div class="research-card reveal" data-preview-gallery="%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B72_1.gif,%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B72_2.gif,%E1%84%80%E1%85%B3%E1%84%85%E1%85%B5%E1%86%B72_3.gif" data-caption="3D morphology reconstruction for phase and morphology evolution in complex nanostructures.">
       <div class="icon"><i class="fas fa-cube"></i></div>
       <h3>Phase &amp; Morphology Engineering</h3>
       <p>Designing and building experimental nanomaterial libraries across phase, morphology, and composition spaces. Mapping transformation pathways during chemical and thermal conversion.</p>
@@ -1329,7 +1347,9 @@ footer {
 </section>
 
 <div class="research-preview" id="researchPreview" aria-hidden="true">
-  <img id="researchPreviewImg" src="" alt="Research area preview">
+  <div class="research-preview-media single" id="researchPreviewMedia">
+    <img id="researchPreviewImg" src="" alt="Research area preview">
+  </div>
   <div class="caption" id="researchPreviewCaption"></div>
 </div>
 
@@ -1774,9 +1794,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 <script>
 const researchPreview = document.getElementById('researchPreview');
+const researchPreviewMedia = document.getElementById('researchPreviewMedia');
 const researchPreviewImg = document.getElementById('researchPreviewImg');
 const researchPreviewCaption = document.getElementById('researchPreviewCaption');
-const researchCards = document.querySelectorAll('.research-card[data-preview]');
+const researchCards = document.querySelectorAll('.research-card[data-preview], .research-card[data-preview-gallery]');
 
 function positionResearchPreview(event) {
   if (!researchPreview || window.innerWidth <= 900) return;
@@ -1801,8 +1822,24 @@ function positionResearchPreview(event) {
 researchCards.forEach(card => {
   card.addEventListener('mouseenter', (event) => {
     const previewSrc = card.dataset.preview;
+    const previewGallery = (card.dataset.previewGallery || '')
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
     const previewCaption = card.dataset.caption || '';
-    researchPreviewImg.src = previewSrc;
+
+    if (previewGallery.length) {
+      researchPreviewMedia.className = 'research-preview-media gallery';
+      researchPreviewMedia.innerHTML = previewGallery
+        .map((src, index) => `<img src="${src}" alt="Research area preview ${index + 1}">`)
+        .join('');
+    } else {
+      researchPreviewMedia.className = 'research-preview-media single';
+      researchPreviewMedia.innerHTML = '<img id="researchPreviewImg" src="" alt="Research area preview">';
+      const singleImg = document.getElementById('researchPreviewImg');
+      if (singleImg) singleImg.src = previewSrc;
+    }
+
     researchPreviewCaption.textContent = previewCaption;
     researchPreview.classList.add('active');
     positionResearchPreview(event);
